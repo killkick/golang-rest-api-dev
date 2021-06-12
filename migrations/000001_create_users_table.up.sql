@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users(
-    user_id serial PRIMARY KEY,
-    encrypyted_password VARCHAR (50) NOT NULL,
-    email VARCHAR (300) UNIQUE NOT NULL
+    id bigserial not null primary key,
+    encrypted_password varchar not null,
+    email varchar not null unique
 );

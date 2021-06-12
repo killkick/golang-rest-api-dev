@@ -3,13 +3,12 @@ package store
 import (
 	"database/sql"
 	_ "github.com/lib/pq" //
-	"http-rest-api/store/repositories"
 )
 
 type Store struct {
 	config         *Config
-	Db             *sql.DB
-	userRepository *repositories.UserRepository
+	db             *sql.DB
+	userRepository *UserRepository
 }
 
 func New(config *Config) *Store {
@@ -26,20 +25,20 @@ func (s *Store) Open() error {
 	if err := db.Ping(); err != nil {
 		return err
 	}
-	s.Db = db
+	s.db = db
 	return nil
 }
 
 func (s *Store) Close() {
-	s.Db.Close()
+	s.db.Close()
 }
 
-func (s *Store) User() *repositories.UserRepository {
+func (s *Store) User() *UserRepository {
 	if s.userRepository != nil {
 		return s.userRepository
 	}
-	s.userRepository = &repositories.UserRepository{
-		Store: s,
+	s.userRepository = &UserRepository{
+		store: s,
 	}
 	return s.userRepository
 }

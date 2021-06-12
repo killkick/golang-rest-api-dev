@@ -9,10 +9,10 @@ var (
 	databaseUrl string
 )
 
-func testMain(m *testing.M) {
+func TestMain(m *testing.M) {
 	databaseUrl = os.Getenv("DATABASE_URL")
-	if databaseUrl == " " {
-		databaseUrl = "host=localhost dbname=restapi_dev sslmode=disable password=password"
+	if databaseUrl == "" {
+		databaseUrl = "host=localhost dbname=restapi_test sslmode=disable user=bratiq password=password"
 	}
 
 	os.Exit(m.Run())
